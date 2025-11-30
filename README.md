@@ -1,9 +1,12 @@
 # VOUCH PROTOCOL
-__      __  ____    _    _    ___   _   _ 
-\ \    / / / __ \  | |  | |  / __| | | | |
- \ \  / / | (_) |  | |__| | | (__  | |_| |
-  \_\/_/   \____/   \____/   \___|  \___/ 
 
+```text
+__      __  ____   _    _    _____   _    _ 
+\ \    / / / __ \ | |  | |  / ____| | |  | |
+ \ \  / / | |  | || |  | | | |      | |__| |
+  \ \/ /  | |__| || |__| | | |____  |  __  |
+   \__/    \____/  \____/   \_____| |_|  |_|
+```
 ![Status](https://img.shields.io/badge/Status-Alpha-blue) ![License](https://img.shields.io/badge/License-MIT-green)
 
 **Vouch** is the open-source standard for **AI Liability & Identity**.
