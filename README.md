@@ -173,3 +173,26 @@ This generates a cryptographically verifiable audit trail that binds three disti
 3. The **Time** (Nonce-protected timestamp).
 
 This disclosure is intended to prevent the patenting of "Identity-Aware Tool Execution" mechanisms by third parties.
+
+### 4. CrewAI Integration
+Vouch works as a native Tool in CrewAI agents.
+
+    from vouch.integrations.crewai.tool import VouchSignerTool
+
+    # Assign the identity tool to your agent
+    agent = Agent(
+        role='Financial Analyst',
+        goal='Sign transactions securely',
+        tools=[VouchSignerTool()],
+        verbose=True
+    )
+
+### 5. Microsoft AutoGen Integration
+Use Vouch to sign messages between conversable agents.
+
+    from vouch.integrations.autogen.tool import VouchSignerTool
+
+    # Register the tool with your AutoGen UserProxy
+    user_proxy.register_function(
+        function_map={"sign_intent": VouchSignerTool().run}
+    )

@@ -30,6 +30,8 @@ dependencies = [
 langchain = ["langchain"]
 mcp = ["mcp"]
 vertex = ["google-cloud-aiplatform"]
+crewai = ["crewai"]
+autogen = ["pyautogen"]
 
 [project.urls]
 "Homepage" = "https://github.com/vouch-protocol/vouch"
