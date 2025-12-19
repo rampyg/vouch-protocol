@@ -8,6 +8,7 @@ vouch/cli.py
 vouch/keys.py
 vouch/kms.py
 vouch/seal.py
+vouch/signer.py
 vouch/verifier.py
 vouch/integrations/google.py
 vouch/integrations/n8n.py
