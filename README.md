@@ -141,27 +141,102 @@ Works with all major AI frameworks out-of-the-box:
 
 ---
 
-## 📜 License & Legal
+## 🎯 Use Cases
 
-This project uses a **3-layer license structure** to balance open collaboration and sustainability:
+### Financial Services
+```python
+# SEC-compliant trade logging
+agent.sign({'action': 'execute_trade', 'amount': 10000, 'symbol': 'AAPL'})
+```
 
-1. **Specification:** [Community Specification License 1.0](https://github.com/vouch-protocol/vouch/blob/main/licenses/LICENSE-SPEC) 
-   - The protocol standard (open for anyone to implement)
-   
-2. **Client SDK:** [Apache License 2.0](https://github.com/vouch-protocol/vouch/blob/main/LICENSE)
-   - The reference implementation (permissive for all uses)
-   
-3. **Server SDK:** [AGPL-3.0](https://github.com/vouch-protocol/vouch/blob/main/licenses/LICENSE-SERVER) OR Commercial License
-   - Network-facing components (pass-forward obligation OR paid license)
+### Customer Service
+```python
+# Data access accountability
+agent.sign({'action': 'read_customer_data', 'customer_id': 'cust_abc'})
+```
 
-**TL;DR for developers:**
-- ✅ Using the client library? **Apache 2.0** (use freely, even in closed-source)
-- ✅ Implementing the protocol yourself? **Community Spec License** (open standard)
-- ⚠️ Running the server component? **AGPL** (open-source your server) OR [contact us](mailto:commercial@vouch-protocol.com) for commercial license
+### Healthcare AI
+```python
+# HIPAA-compliant audit trail
+agent.sign({'action': 'access_phi', 'patient_id': '12345'})
+```
 
-**Default LICENSE:** This repository's main LICENSE file is Apache 2.0 for maximum compatibility. See individual components for specific licenses.
+[See full examples →](https://github.com/vouch-protocol/vouch/tree/main/examples)
 
-[View licenses/ directory](https://github.com/vouch-protocol/vouch/tree/main/licenses)
+---
+
+## 📚 Documentation
+
+- 🚀 [Quick Start](https://github.com/vouch-protocol/vouch#quick-start)
+- 🔧 [Integration Guides](https://github.com/vouch-protocol/vouch/tree/main/vouch/integrations)
+- 📖 [Protocol Specification](https://github.com/vouch-protocol/vouch/blob/main/docs/vouch_guide.md)
+- 🏢 [Enterprise Features](https://github.com/vouch-protocol/vouch#enterprise-features)
+- 🛡️ [Security Best Practices](https://github.com/vouch-protocol/vouch/blob/main/docs/vouch_guide.md)
+- ❓ [FAQ](https://github.com/vouch-protocol/vouch/discussions)
+
+---
+
+## 🤝 Community
+
+- **Discord** - Ask questions, share use cases → [Join now](https://discord.gg/VxgYkjdph)
+- **GitHub Discussions** - Technical discussions → [Start a discussion](https://github.com/vouch-protocol/vouch/discussions)
+- **Twitter/X** - Updates and announcements → [@Vouch_Protocol](https://x.com/Vouch_Protocol)
+
+---
+
+## 🛣️ Roadmap
+
+- [x] Core protocol (Ed25519, JWK, JWT)
+- [x] MCP integration
+- [x] LangChain, CrewAI, AutoGPT integrations
+- [ ] W3C Verifiable Credentials compatibility
+- [ ] Multi-signature support
+- [ ] Hardware key support (YubiKey, etc.)
+- [ ] Browser extension (verify agents in real-time)
+
+[View full roadmap →](https://github.com/vouch-protocol/vouch/issues)
+
+---
+
+## 📜 License
+
+**Apache License 2.0** - See [LICENSE](https://github.com/vouch-protocol/vouch/blob/main/LICENSE) file
+
+**This is NOT AGPL.** You can use this in commercial, closed-source products.
+
+For multi-license details (Client SDK/Server SDK/Specification), see our [3-layer license structure](https://github.com/vouch-protocol/vouch#-license--legal).
+
+---
+
+## 🙏 Acknowledgments
+
+Inspired by:
+- **SSL/TLS** (the gold standard for identity)
+- **OAuth 2.0** (federated identity done right)
+- **W3C Verifiable Credentials** (the future of digital identity)
+
+Built by [Ramprasad Gaddam](https://www.linkedin.com/in/rampy) ([Twitter/X](https://x.com/rampyg))
+
+---
+
+## 🚀 Contributing
+
+We welcome contributions! See [CONTRIBUTING.md](https://github.com/vouch-protocol/vouch/blob/main/CONTRIBUTING.md).
+
+**Areas where we need help:**
+- [ ] Add integrations (Haystack, Semantic Kernel, etc.)
+- [ ] Improve documentation
+- [ ] Write tutorials
+- [ ] Build examples
+- [ ] Security audits
+
+---
+
+**⭐ Star this repo if you find it useful!**
+
+[Star on GitHub](https://github.com/vouch-protocol/vouch) | [Join Discord](https://discord.gg/VxgYkjdph) | [Follow on Twitter](https://x.com/Vouch_Protocol)
+
+---
 
 ## Defensive Disclosure (Prior Art)
 **Publication Date:** December 14, 2025  
