@@ -1,6 +1,6 @@
 # Vouch Protocol
 
-[![Discord](https://img.shields.io/badge/Discord-Join_Community-7289da?logo=discord&logoColor=white)](https://discord.gg/RXuKJDfC)
+[![Discord](https://img.shields.io/badge/Discord-Join_Community-7289da?logo=discord&logoColor=white)](https://discord.gg/VxgYkjdph)
 [![Spec: Community](https://img.shields.io/badge/Spec-Community_License-green.svg)](https://github.com/vouch-protocol/vouch/blob/main/licenses/LICENSE-SPEC)
 [![Client: Apache 2.0](https://img.shields.io/badge/Client-Apache_2.0-blue.svg)](https://github.com/vouch-protocol/vouch/blob/main/LICENSE)
 [![Server: AGPL-3.0](https://img.shields.io/badge/Server-AGPL_3.0-orange.svg)](https://github.com/vouch-protocol/vouch/blob/main/licenses/LICENSE-SERVER)
@@ -13,7 +13,7 @@
 > 
 > **Vouch Protocol is the SSL certificate for AI agents.**
 
-[Read the spec →](https://github.com/vouch-protocol/vouch/blob/main/docs/vouch_guide.md) | [Join Discord →](https://discord.gg/RXuKJDfC)
+[Read the spec →](https://github.com/vouch-protocol/vouch/blob/main/docs/vouch_guide.md) | [Join Discord →](https://discord.gg/VxgYkjdph)
 
 ---
 
