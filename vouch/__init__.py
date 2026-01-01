@@ -5,7 +5,7 @@ This package provides cryptographic identity binding for autonomous AI agents,
 enabling verifiable proof of intent and non-repudiation.
 """
 
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 
 # Core signing/verification
 from .signer import Signer

@@ -6,194 +6,138 @@
 [![Server: AGPL-3.0](https://img.shields.io/badge/Server-AGPL_3.0-orange.svg)](https://github.com/vouch-protocol/vouch/blob/main/licenses/LICENSE-SERVER)
 [![Status](https://img.shields.io/badge/Status-Public_Beta-yellow)](https://github.com/vouch-protocol/vouch)
 
+> **The Open Standard for AI Agent Identity & Accountability**
+> 
+> When Anthropic launched MCP, they solved "how agents call tools."  
+> They didn't solve "how we TRUST those agents."
+> 
+> **Vouch Protocol is the SSL certificate for AI agents.**
 
-    __      __  ____   _    _    _____   _    _ 
-    \ \    / / / __ \ | |  | |  / ____| | |  | |
-     \ \  / / | |  | || |  | | | |      | |__| |
-      \ \/ /  | |__| || |__| | | |____  |  __  |
-       \__/    \____/  \____/   \_____| |_|  |_|
-
-> **"The 'Green Lock' for the Agentic Web."**
-
-**Vouch** is the open-source standard for **AI Agent Identity, Reputation, & Liability**. It provides the missing cryptographic handshake to allow autonomous agents to prove their intent and accountability.
-
-> **⚠️ Public Beta:** This protocol is v1.0 compliant but the implementation is currently in **Beta**. Please report issues on GitHub.
+[Read the spec →](https://github.com/vouch-protocol/vouch/blob/main/docs/vouch_guide.md) | [Join Discord →](https://discord.gg/RXuKJDfC)
 
 ---
 
-## ⚡ Quick Start
+## The Problem
 
-### 1. Installation
+AI agents are making real-world API calls with **ZERO cryptographic proof** of:
+- **WHO** they are
+- **WHAT** they intended to do  
+- **WHEN** they did it
 
-    pip install vouch-protocol
+**Examples of the risk:**
+- Healthcare AI accesses patient data → HIPAA violation risk
+- Financial AI makes unauthorized trades → Liability nightmare
+- Customer service AI leaks data → Compliance failure
+
+**Current solutions:**
+- **DIY JWT signing** → No agent-specific features, security mistakes easy
+- **Nothing** → Most people just YOLO it and hope for the best
+
+---
+
+## The Solution
+
+**Vouch Protocol** provides cryptographic identity for AI agents, modeled after SSL/TLS:
+
+✅ **Ed25519 signatures** (industry-standard cryptography)  
+✅ **JWK key format** (works with existing infrastructure)  
+✅ **Audit trail** (cryptographic proof of every action)  
+✅ **Framework-agnostic** (works with MCP, LangChain, CrewAI, etc.)  
+✅ **Open source** (Apache 2.0 license)
+
+**Think of it as:**
+- SSL certificate = Proves website identity
+- **Vouch Protocol = Proves AI agent identity**
+
+---
+
+## Why Vouch Protocol?
+
+### vs. DIY JWT
+
+| Feature | Vouch Protocol | DIY JWT |
+|---------|---------------|---------|
+| **Agent-specific** | ✅ (designed for agents) | ❌ (generic) |
+| **MCP integration** | ✅ (native) | ❌ (manual) |
+| **Framework integrations** | ✅ (LangChain, CrewAI, etc.) | ❌ |
+| **Audit trail format** | ✅ (standardized) | ❌ (custom) |
+| **Security best practices** | ✅ (built-in) | ⚠️ (easy to mess up) |
+
+---
+
+## Quick Start
+
+### 1. Install
+```bash
+pip install vouch-protocol
+```
 
 ### 2. Generate Identity
+```bash
+vouch init --domain your-agent.com
+```
 
-    # Generate a new keypair
-    vouch init --domain your-agent.com
+### 3. Sign an Action (Agent Side)
+```python
+from vouch import Signer
+import os
+
+signer = Signer(
+    private_key=os.environ['VOUCH_PRIVATE_KEY'],
+    did=os.environ['VOUCH_DID']
+)
+
+token = signer.sign({'action': 'read_database', 'target': 'users'})
+# Include token in Vouch-Token header
+```
+
+### 4. Verify (API Side)
+```python
+from fastapi import FastAPI, Header, HTTPException
+from vouch import Verifier
+
+app = FastAPI()
+
+@app.post("/api/resource")
+def protected_route(vouch_token: str = Header(alias="Vouch-Token")):
+    public_key = '{"kty":"OKP"...}' # From agent's vouch.json
     
-    # Export as environment variables
-    vouch init --domain your-agent.com --env
-
-### 3. Sign a Payload
-
-    from vouch import Signer
-    import os
-
-    signer = Signer(
-        private_key=os.environ['VOUCH_PRIVATE_KEY'],
-        did=os.environ['VOUCH_DID']
-    )
-
-    token = signer.sign({'action': 'read_database', 'target': 'users'})
-    # Use token in Vouch-Token header
-
-### 4. Verify a Token (Gatekeepers)
-
-    from fastapi import FastAPI, Header, HTTPException
-    from vouch import Verifier
-
-    app = FastAPI()
-
-    @app.post("/api/resource")
-    def protected_route(vouch_token: str = Header(alias="Vouch-Token")):
-        # Verify with the agent's public key
-        public_key = '{"kty":"OKP","crv":"Ed25519","x":"..."}'  # From agent's vouch.json
+    is_valid, passport = Verifier.verify(vouch_token, public_key_jwk=public_key)
+    
+    if not is_valid:
+        raise HTTPException(status_code=401, detail="Untrusted Agent")
         
-        is_valid, passport = Verifier.verify(vouch_token, public_key_jwk=public_key)
-        
-        if not is_valid:
-            raise HTTPException(status_code=401, detail="Untrusted Agent")
-            
-        return {"status": "Verified", "agent": passport.sub}
+    return {"status": "Verified", "agent": passport.sub}
+```
+
+**That's it.** 3 lines to sign, 3 lines to verify.
 
 ---
 
-## 🔌 Integrations
+## Integrations
 
-### 1. Model Context Protocol (MCP)
-Vouch includes a native MCP server for Claude Desktop & Cursor.
+Works with all major AI frameworks out-of-the-box:
 
-**Configuration:**
+- ✅ **Model Context Protocol (MCP)** - Native integration for Claude Desktop & Cursor
+- ✅ **LangChain** - Sign tool calls automatically
+- ✅ **CrewAI** - Multi-agent identity management
+- ✅ **AutoGPT** - Autonomous agent signing
+- ✅ **AutoGen** - Microsoft multi-agent framework
+- ✅ **Google Vertex AI** - Sign function calls
+- ✅ **n8n** - Low-code agent workflows
 
-    {
-      "mcpServers": {
-        "vouch": {
-          "command": "python3",
-          "args": ["-m", "vouch.integrations.mcp.server"],
-          "env": {
-            "VOUCH_PRIVATE_KEY": "YOUR_KEY",
-            "VOUCH_DID": "did:web:your-domain.com"
-          }
-        }
-      }
-    }
-
-### 2. LangChain Integration
-Add cryptographic identity to your LangChain tools.
-
-    from vouch.integrations.langchain.tool import VouchSignerTool
-    
-    tools = [VouchSignerTool()]
-
-### 3. CrewAI Integration
-Works natively with CrewAI agents.
-
-    from vouch.integrations.crewai.tool import VouchSignerTool
-
-    agent = Agent(
-        role='Analyst', 
-        tools=[VouchSignerTool()]
-    )
-
-### 4. AutoGPT Integration
-Register the signer command with your agent.
-
-    from vouch.integrations.autogpt import register_commands
-
-### 5. AutoGen Integration
-Use with Microsoft AutoGen agents.
-
-    from vouch.integrations.autogen import sign_action
-    
-    # Register as a function tool
-    assistant.register_function(sign_action)
-
-### 6. Google Vertex AI Integration
-Sign function calls in Vertex AI Agent Builder.
-
-    from vouch.integrations.google import VertexAISigner
-    
-    signer = VertexAISigner()
-    token = signer.sign_tool_call('search_database', {'query': 'test'})
-
-### 7. n8n Integration (Low-Code Agents)
-You can use Vouch directly in n8n using the **Python Code Node**.
-
-**Prerequisite:**
-Ensure your n8n instance installs the library:
-`export EXTERNAL_PYTHON_PACKAGES=vouch-protocol`
-
-**Code Node Snippet:**
-
-    from vouch import Signer
-    import os
-
-    signer = Signer(
-        private_key=os.environ.get('VOUCH_PRIVATE_KEY'), 
-        did=os.environ.get('VOUCH_DID')
-    )
-
-    # Sign the incoming workflow data
-    for item in _input.all():
-        item.json['vouch_token'] = signer.sign(item.json)
-    
-    return _input.all()
+[See all integrations →](https://github.com/vouch-protocol/vouch/tree/main/vouch/integrations)
 
 ---
 
-## 🏢 Enterprise Features
+## Enterprise Features
 
-### Key Rotation
-
-    from vouch.kms import RotatingKeyProvider, KeyConfig
-
-    keys = [
-        KeyConfig(private_key_jwk='...', did='did:web:agent.com', key_id='key1'),
-        KeyConfig(private_key_jwk='...', did='did:web:agent.com', key_id='key2'),
-    ]
-
-    provider = RotatingKeyProvider(keys, rotation_interval_hours=24)
-    signer = provider.get_signer()  # Automatically uses active key
-
-### Voice AI Signing
-
-    from vouch import Signer
-    from vouch.audio import AudioSigner
-
-    signer = Signer(private_key='...', did='did:web:voice-ai.com')
-    audio_signer = AudioSigner(signer)
-
-    signed_frame = audio_signer.sign_frame(audio_bytes)
-    print(signed_frame.vouch_token)
-
----
-
-## 🖥️ CLI Reference
-
-    # Generate new identity
-    vouch init --domain example.com
-    vouch init --domain example.com --env  # Output as env vars
-
-    # Sign a message
-    vouch sign "Hello World"
-    vouch sign '{"action": "test"}' --json
-    vouch sign "message" --header  # Include Vouch-Token prefix
-
-    # Verify a token
-    vouch verify <token>
-    vouch verify <token> --key '{"kty":"OKP",...}'  # With public key
-    vouch verify <token> --json  # Output as JSON
+- 🔐 **Key Rotation** - Automatic rotating keys for production
+- 🎙️ **Voice AI Signing** - Sign audio frames in real-time  
+- ☁️ **Cloud KMS** - AWS KMS, GCP Cloud KMS, Azure Key Vault
+- 📊 **Reputation Scoring** - Track agent behavior over time
+- 🚫 **Revocation Registry** - Blacklist compromised keys
+- ⚡ **Redis Caching** - Production-scale verification
 
 ---
 
@@ -220,11 +164,11 @@ This project uses a **3-layer license structure** to balance open collaboration 
 [View licenses/ directory](https://github.com/vouch-protocol/vouch/tree/main/licenses)
 
 ## Defensive Disclosure (Prior Art)
-**Publication Date:** December 14, 2025
+**Publication Date:** December 14, 2025  
 **Subject:** Cryptographic Binding of AI Agent Intent via Model Context Protocol (MCP)
 
 To ensure the freedom of the ecosystem to build secure agents, we explicitly disclose the following novel method as Prior Art:
 
-1.  **The "Identity Sidecar" Pattern:** An MCP Server acting as a local "Identity Proxy" for a stateless LLM, isolating keys from application code.
-2.  **Just-in-Time (JIT) Intent Signing:** A workflow where the LLM requests a signed "Vouch-Token" for a specific action *before* execution.
-3.  **Non-Repudiation:** Generating a cryptographically verifiable audit trail binding Identity, Intent, and Time.
+1. **The "Identity Sidecar" Pattern:** An MCP Server acting as a local "Identity Proxy" for a stateless LLM, isolating keys from application code.
+2. **Just-in-Time (JIT) Intent Signing:** A workflow where the LLM requests a signed "Vouch-Token" for a specific action *before* execution.
+3. **Non-Repudiation:** Generating a cryptographically verifiable audit trail binding Identity, Intent, and Time.
