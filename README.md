@@ -1,7 +1,9 @@
 # Vouch Protocol
 
 [![Discord](https://img.shields.io/badge/Discord-Join_Community-7289da?logo=discord&logoColor=white)](https://discord.gg/RXuKJDfC)
-[![License](https://img.shields.io/badge/License-Multiple-blue.svg)](https://github.com/vouch-protocol/vouch/blob/main/LICENSE)
+[![Spec: Community](https://img.shields.io/badge/Spec-Community_License-green.svg)](https://github.com/vouch-protocol/vouch/blob/main/licenses/LICENSE-SPEC)
+[![Client: Apache 2.0](https://img.shields.io/badge/Client-Apache_2.0-blue.svg)](https://github.com/vouch-protocol/vouch/blob/main/LICENSE)
+[![Server: AGPL-3.0](https://img.shields.io/badge/Server-AGPL_3.0-orange.svg)](https://github.com/vouch-protocol/vouch/blob/main/licenses/LICENSE-SERVER)
 [![Status](https://img.shields.io/badge/Status-Public_Beta-yellow)](https://github.com/vouch-protocol/vouch)
 
 
@@ -199,11 +201,23 @@ Ensure your n8n instance installs the library:
 
 This project uses a **3-layer license structure** to balance open collaboration and sustainability:
 
-1.  **Specification**: Community Specification License 1.0 (Open Standard + Patent Grants)
-2.  **Client SDK**: Apache 2.0 (Permissive for all uses)
-3.  **Server SDK**: AGPL-3.0 (Pass-forward obligation for network services)
+1. **Specification:** [Community Specification License 1.0](https://github.com/vouch-protocol/vouch/blob/main/licenses/LICENSE-SPEC) 
+   - The protocol standard (open for anyone to implement)
+   
+2. **Client SDK:** [Apache License 2.0](https://github.com/vouch-protocol/vouch/blob/main/LICENSE)
+   - The reference implementation (permissive for all uses)
+   
+3. **Server SDK:** [AGPL-3.0](https://github.com/vouch-protocol/vouch/blob/main/licenses/LICENSE-SERVER) OR Commercial License
+   - Network-facing components (pass-forward obligation OR paid license)
 
-[View Full License Index](https://github.com/vouch-protocol/vouch/blob/main/LICENSE)
+**TL;DR for developers:**
+- ✅ Using the client library? **Apache 2.0** (use freely, even in closed-source)
+- ✅ Implementing the protocol yourself? **Community Spec License** (open standard)
+- ⚠️ Running the server component? **AGPL** (open-source your server) OR [contact us](mailto:commercial@vouch-protocol.com) for commercial license
+
+**Default LICENSE:** This repository's main LICENSE file is Apache 2.0 for maximum compatibility. See individual components for specific licenses.
+
+[View licenses/ directory](https://github.com/vouch-protocol/vouch/tree/main/licenses)
 
 ## Defensive Disclosure (Prior Art)
 **Publication Date:** December 14, 2025
