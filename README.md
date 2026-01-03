@@ -1,5 +1,6 @@
 # Vouch Protocol
 
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/11688/badge)](https://www.bestpractices.dev/projects/11688)
 [![Discord](https://img.shields.io/badge/Discord-Join_Community-7289da?logo=discord&logoColor=white)](https://discord.gg/VxgYkjdph)
 [![Spec: Community](https://img.shields.io/badge/Spec-Community_License-green.svg)](https://github.com/vouch-protocol/vouch/blob/main/licenses/LICENSE-SPEC)
 [![Client: Apache 2.0](https://img.shields.io/badge/Client-Apache_2.0-blue.svg)](https://github.com/vouch-protocol/vouch/blob/main/LICENSE)
