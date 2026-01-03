@@ -268,6 +268,5 @@ To ensure ecosystem freedom, we publish defensive prior art disclosures for nove
 | [PAD-001](docs/disclosures/PAD-001-cryptographic-agent-identity.md) | Cryptographic Agent Identity | Intent-bound tokens, agent DIDs |
 | [PAD-002](docs/disclosures/PAD-002-chain-of-custody.md) | Chain of Custody | Recursive delegation, intent chains |
 | [PAD-003](docs/disclosures/PAD-003-identity-sidecar.md) | Identity Sidecar Pattern | LLM key isolation, JIT signing |
-| [PAD-004](docs/disclosures/PAD-004-liability-adjudication.md) | Liability Adjudication | AI insurance, automated claims |
 
 [View all disclosures →](docs/disclosures/README.md)
