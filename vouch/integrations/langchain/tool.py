@@ -80,7 +80,7 @@ class VouchSignerTool(BaseTool):
         if private_key and did:
             try:
                 self._signer = Signer(private_key=private_key, did=did)
-            except Exception as e:
+            except Exception:
                 # Log but don't fail initialization
                 pass
     

@@ -131,7 +131,7 @@ def cmd_verify(args: argparse.Namespace) -> int:
                 }
                 print(json.dumps(result, indent=2))
             else:
-                print(f"✅ VALID")
+                print("✅ VALID")
                 print(f"   Subject: {passport.sub}")
                 print(f"   Issuer:  {passport.iss}")
                 print(f"   Payload: {json.dumps(passport.payload)}")

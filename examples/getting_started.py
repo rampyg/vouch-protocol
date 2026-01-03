@@ -49,10 +49,10 @@ async def main():
     # In production, you would generate this once and store it securely (e.g. env vars or KMS)
     keys = generate_identity(domain="tutorial-agent.com")
     
-    print(f"✅ Identity Created!")
+    print("✅ Identity Created!")
     print(f"   DID (ID Card):    {keys.did}")
     print(f"   Public Key (Face): {json.loads(keys.public_key_jwk)['x'][:10]}... (Safe to share)")
-    print(f"   Private Key:      [HIDDEN] (Never share this!)")
+    print("   Private Key:      [HIDDEN] (Never share this!)")
     
     # ---------------------------------------------------------
     # STEP 2: SIGNING
@@ -79,7 +79,7 @@ async def main():
     print("✍️  Signing the intent...")
     token = signer.sign(action)
     
-    print(f"✅ Vouch Token Generated!")
+    print("✅ Vouch Token Generated!")
     print(f"   Token length: {len(token)} chars")
     print(f"   Token preview: {token[:20]}...{token[-20:]}")
     print("   (This token is essentially a digital passport stamped with the action)")
